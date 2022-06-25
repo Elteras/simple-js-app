@@ -21,12 +21,39 @@ let Squirtle = {
     
 }
 
-let pokemonList = [Bulbasaur, Charmander, Squirtle]
 
-for (let i = 0; i < pokemonList.length; i++) {
-    if (pokemonList[i].height > 0.6) { 
-        document.write('<p>' + pokemonList[i].name + ' (Height: ' + pokemonList[i].height + ')' + ' - chonky boi!' + '</p>')
+let pokemonRepo = (function() {
+    let pokemonList = [Bulbasaur, Charmander, Squirtle];
+
+    function add(pokemon) {
+        pokemonList.push(pokemon);
+    }
+
+    function getAll() {
+        return pokemonList;
+    }
+
+    return {
+        add: add,
+        getAll: getAll
+    };
+  
+    
+}) ();
+
+
+function printPokemon(poke) {
+    if (poke.height > 0.6) { 
+        document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + ' - chonky boi!' + '</p>')
 }else{
-        document.write('<p>' + pokemonList[i].name + ' (Height: ' + pokemonList[i].height + ')' + '</p>')
+        document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + '</p>')
     }
 }
+
+
+pokemonRepo.getAll().forEach(printPokemon);
+
+
+
+
+
