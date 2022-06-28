@@ -33,25 +33,79 @@ let pokemonRepo = (function() {
         return pokemonList;
     }
 
+    function addListItem(pokemon) {     /*Is this all redundant with function add? idk*/
+      
+        let pokedexList = document.querySelector('.pokedex-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+
+        button.innerText = pokemon.name;
+        button.classList.add('poke-button');
+
+        listItem.appendChild(button);
+        pokedexList.appendChild(listItem);
+
+        button.addEventListener('click', function (event) {
+            pokemonRepo.showDetails(pokemon);
+        });
+
+        // pokemonRepo.newFunc(button, pokemon);
+    }
+
+    function showDetails(pokemon) {
+        console.log(pokemon.name);
+    }
+
+    function newFunc(button, pokemon) {
+        let pokeButton = document.querySelector('poke-button');
+        button.addEventListener('click', function (event) {
+            pokemonRepo.showDetails(pokemon);
+        });
+    }
+
+
     return {
         add: add,
-        getAll: getAll
+        getAll: getAll,
+        addListItem: addListItem,
+        showDetails: showDetails,
+        newFunc: newFunc,
     };
   
     
 }) ();
 
 
-function printPokemon(poke) {
-    if (poke.height > 0.6) { 
-        document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + ' - chonky boi!' + '</p>')
-}else{
-        document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + '</p>')
-    }
-}
+
+pokemonRepo.getAll().forEach(pokemonRepo.addListItem);
 
 
-pokemonRepo.getAll().forEach(printPokemon);
+
+
+// function printPokemon(poke) {
+
+//     let pokedexList = document.querySelector('.pokedex-list');
+//     let listItem = document.createElement('li');
+//     let button = document.createElement('button');
+
+//     button.innerText = poke.name;
+//     button.classList.add('poke-button');
+
+//     listItem.appendChild(button);
+//     pokedexList.appendChild(listItem);
+
+
+//     if (poke.height > 0.6) { 
+//         document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + ' - chonky boi!' + '</p>')
+// }else{
+//         document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + '</p>')
+//     }
+// }
+
+
+// pokemonRepo.getAll().forEach(printPokemon);
+
+
 
 
 
