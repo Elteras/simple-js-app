@@ -49,7 +49,7 @@ let pokemonRepo = (function() {
             pokemonRepo.showDetails(pokemon);
         });
 
-        // pokemonRepo.newFunc(button, pokemon);
+        // pokemonRepo.newFunc(button, pokemon);                //This is an alternate way to do the same thing as the code right above (L48-51)
     }
 
     function showDetails(pokemon) {
