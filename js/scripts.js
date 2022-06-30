@@ -1,29 +1,6 @@
-
-let Bulbasaur = {
-    name: 'Bulbasaur',
-    id: 001,
-    height: 0.7,
-    types: ['grass', 'poison']
-}
-
-let Charmander = {
-    name: 'Charmander',
-    height: 0.6,
-    id: 004,
-    types: ['fire']
-}
-
-let Squirtle = {
-    name: 'Squirtle',
-    height: 0.5,
-    id: 007,
-    types: ['water']
-    
-}
-
-
 let pokemonRepo = (function() {
-    let pokemonList = [Bulbasaur, Charmander, Squirtle];
+    let pokemonList = []
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function add(pokemon) {
         pokemonList.push(pokemon);
@@ -33,10 +10,10 @@ let pokemonRepo = (function() {
         return pokemonList;
     }
 
-    function addListItem(pokemon) {     /*Is this all redundant with function add? idk*/
+    function addListItem(pokemon) {     
       
         let pokedexList = document.querySelector('.pokedex-list');
-        let listItem = document.createElement('li');
+        let listItem = document.createElement('div');
         let button = document.createElement('button');
 
         button.innerText = pokemon.name;
@@ -47,63 +24,62 @@ let pokemonRepo = (function() {
 
         button.addEventListener('click', function (event) {
             pokemonRepo.showDetails(pokemon);
-        });
-
-        // pokemonRepo.newFunc(button, pokemon);                //This is an alternate way to do the same thing as the code right above (L48-51)
+        });       
     }
 
     function showDetails(pokemon) {
-        console.log(pokemon.name);
-    }
-
-    function newFunc(button, pokemon) {
-        let pokeButton = document.querySelector('poke-button');
-        button.addEventListener('click', function (event) {
-            pokemonRepo.showDetails(pokemon);
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon.name);
         });
     }
 
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            item.imageUrl = details.spirtes.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function(e) {
+            console.error(e);
+        });
+    } 
 
     return {
         add: add,
         getAll: getAll,
         addListItem: addListItem,
         showDetails: showDetails,
-        newFunc: newFunc,
+        loadList: loadList,
+        loadDetails: loadDetails,
     };
-  
-    
 }) ();
 
 
-
-pokemonRepo.getAll().forEach(pokemonRepo.addListItem);
-
-
-
-
-// function printPokemon(poke) {
-
-//     let pokedexList = document.querySelector('.pokedex-list');
-//     let listItem = document.createElement('li');
-//     let button = document.createElement('button');
-
-//     button.innerText = poke.name;
-//     button.classList.add('poke-button');
-
-//     listItem.appendChild(button);
-//     pokedexList.appendChild(listItem);
+pokemonRepo.loadList().then(function() {
+    pokemonRepo.getAll().forEach(function(pokemon){
+        pokemonRepo.addListItem(pokemon);
+    });
+});
 
 
-//     if (poke.height > 0.6) { 
-//         document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + ' - chonky boi!' + '</p>')
-// }else{
-//         document.write('<p>' + poke.name + ' (Height: ' + poke.height + ')' + '</p>')
-//     }
-// }
-
-
-// pokemonRepo.getAll().forEach(printPokemon);
 
 
 
