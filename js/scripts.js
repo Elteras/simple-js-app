@@ -30,6 +30,7 @@ let pokemonRepo = (function() {
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
             console.log(pokemon.name);
+            console.log(pokemon.detailsUrl);
         });
     }
 
@@ -54,7 +55,7 @@ let pokemonRepo = (function() {
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
-            item.imageUrl = details.spirtes.front_default;
+            item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.types = details.types;
         }).catch(function(e) {
