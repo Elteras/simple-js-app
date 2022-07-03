@@ -16,7 +16,10 @@ let pokemonRepo = (function() {
         let listItem = document.createElement('div');
         let button = document.createElement('button');
 
-        button.innerText = pokemon.name;
+        let pokename = pokemon.name
+        let pokenameStr = ((pokename.charAt(0)).toUpperCase()) + pokename.slice(1);
+
+        button.innerText = pokenameStr;
         button.classList.add('poke-button');
 
         listItem.appendChild(button);
@@ -29,8 +32,17 @@ let pokemonRepo = (function() {
 
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-            console.log(pokemon.name);
+
+            let pokename = pokemon.name
+            let pokenameStr = ((pokename.charAt(0)).toUpperCase()) + pokename.slice(1);
+
+            console.log(pokenameStr);
             console.log(pokemon.detailsUrl);
+            console.log("Height: " + pokemon.height + " decimeters");
+            console.log(pokemon.imageUrl);
+
+
+
         });
     }
 
@@ -41,7 +53,7 @@ let pokemonRepo = (function() {
             json.results.forEach(function (item) {
                 let pokemon = {
                     name: item.name,
-                    detailsUrl: item.url
+                    detailsUrl: item.url,
                 };
                 add(pokemon);
             });
