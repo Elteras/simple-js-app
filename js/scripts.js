@@ -38,18 +38,6 @@ let pokemonRepo = (function() {
 
             let pokeHeightStr = ('Height: ' + pokemon.height + ' decimeters')
 
-
-            // We're gonna keep the above variables
-
-            console.log(pokeNameStr);
-            console.log(pokemon.detailsUrl);
-            console.log('Height: ' + pokemon.height + ' decimeters');
-            console.log(pokemon.imageUrl);
-
-// -----------------------------
-//Above is previous version where we just console.logged. Below is attempt to display the information via modals. 
-//------------------------------
-
             let modalContainer = document.querySelector('#modal-container');
             modalContainer.innerHTML = ''   // Not sure about this line
             let modal = document.createElement('div');
