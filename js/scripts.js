@@ -29,9 +29,18 @@ let pokemonRepo = (function() {
         listItem.appendChild(button);
         pokedexList.appendChild(listItem);
 
-        button.addEventListener('click', function (event) {
+        button.addEventListener('click', function (event) { //this works perfectly
             pokemonRepo.showDetails(pokemon);
         });    
+        
+        document.addEventListener('touchstart', e => {      // This is just to test if touchstart works. It does.
+            console.log('touch successful');
+        })
+
+        button.addEventListener('touchstart', e => {        // And yet for whatever reason, this DOESNT work.
+            pokemonRepo.showDetails(pokemon);
+        });    
+
     }
 
     //Creates and loads modals
@@ -62,9 +71,18 @@ let pokemonRepo = (function() {
               });
 
             document.addEventListener('click', (event) => {
-                if (!event.target.closest('modal')) {
+                if (!event.target.closest('.modal')) {
                     hideModal();
-                }}, false);      //Not sure what the 'false' does.
+                }}, false);     
+
+            document.addEventListener('touchstart', (event) => {            //this is kinda pointless i gues rn
+                if (!event.target.closest('.modal')) {
+                    hideModal();
+                }}, false);     
+
+
+
+                
             //----------
 
             let displayName = document.createElement('h2');    
