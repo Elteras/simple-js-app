@@ -2,14 +2,18 @@ let pokemonRepo = (function() {
     let pokemonList = []
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
 
+
+    //Add new pokemon to the pokemon list
     function add(pokemon) {
         pokemonList.push(pokemon);
     }
 
+    //Return all pokemon in the list
     function getAll() {
         return pokemonList;
     }
 
+    //Creates and adds all the buttons to the DOM
     function addListItem(pokemon) {     
       
         let pokedexList = document.querySelector('.pokedex-list');
@@ -27,9 +31,10 @@ let pokemonRepo = (function() {
 
         button.addEventListener('click', function (event) {
             pokemonRepo.showDetails(pokemon);
-        });       
+        });    
     }
 
+    //Creates and loads modals
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
 
@@ -85,13 +90,15 @@ let pokemonRepo = (function() {
         });
     }
 
+
+    //closes modals
     function hideModal() {
         let modalContainer = document.querySelector('#modal-container');
         modalContainer.classList.remove('is-visible');
     }
 
 
-
+    //Fetch pokemon data from the API
     function loadList() {
         return fetch(apiUrl).then(function (response) {
             return response.json();
@@ -108,6 +115,7 @@ let pokemonRepo = (function() {
         })
     }
 
+    //Fetch details about each pokemon from the API
     function loadDetails(item) {
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
