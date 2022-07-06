@@ -29,18 +29,9 @@ let pokemonRepo = (function() {
         listItem.appendChild(button);
         pokedexList.appendChild(listItem);
 
-        button.addEventListener('click', function (event) { //this works perfectly
+        button.addEventListener('click', function (event) { 
             pokemonRepo.showDetails(pokemon);
         });    
-        
-        document.addEventListener('touchstart', e => {      // This is just to test if touchstart works. It does.
-            console.log('touch successful');
-        })
-
-        button.addEventListener('touchstart', e => {        // And yet for whatever reason, this DOESNT work.
-            pokemonRepo.showDetails(pokemon);
-        });    
-
     }
 
     //Creates and loads modals
@@ -53,7 +44,7 @@ let pokemonRepo = (function() {
             let pokeHeightStr = ('Height: ' + pokemon.height + ' decimeters')
 
             let modalContainer = document.querySelector('#modal-container');
-            modalContainer.innerHTML = ''   // Not sure about this line
+            modalContainer.innerHTML = ''   
             let modal = document.createElement('div');
             modal.classList.add('modal');
 
@@ -62,7 +53,7 @@ let pokemonRepo = (function() {
             let closeModalElement = document.createElement('button');
             closeModalElement.classList.add('modal-close');
             closeModalElement.innerText = 'X';
-            closeModalElement.addEventListener('click', hideModal);
+            closeModalElement.addEventListener('click', hideModal);   
 
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
@@ -74,14 +65,6 @@ let pokemonRepo = (function() {
                 if (!event.target.closest('.modal')) {
                     hideModal();
                 }}, false);     
-
-            document.addEventListener('touchstart', (event) => {            //this is kinda pointless i gues rn
-                if (!event.target.closest('.modal')) {
-                    hideModal();
-                }}, false);     
-
-
-
                 
             //----------
 
@@ -101,9 +84,6 @@ let pokemonRepo = (function() {
             modal.appendChild(displayImg);
             modalContainer.appendChild(modal);
             modalContainer.classList.add('is-visible');
-
-
-
 
         });
     }

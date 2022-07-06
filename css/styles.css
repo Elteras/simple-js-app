@@ -93,7 +93,6 @@ body {
     }
 
     #modal-container {
-        display: flex;
         justify-content: center;
         text-align: center;
     }
@@ -111,7 +110,6 @@ body {
     }
 
     #modal-container {
-        display: flex;
         justify-content: center;
         text-align: center;
     }
