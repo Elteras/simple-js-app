@@ -2,8 +2,6 @@ body {
 
     width: 90vw;
     height: 90vh;
-
-    /* display: grid; */
     text-align: left;
     margin: 10px 20px;
 }
@@ -24,77 +22,34 @@ body {
 }
 
 .pokedex-list {
+    text-align: center;
+    margin-top: 60px;
+}
 
+
+.btn-warning:hover {
+    background-color: rgb(218, 77, 218);
+}
+
+.modal-body {
+    width: 100%;
     text-align: center;
 }
 
-
-
-#modal-container {
-
-    position: fixed;
-    padding: 20px;
-    box-sizing: border-box;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    z-index: 999;           /* To show it above other content */
-    overflow: auto;         /* Allows scrolling if screen isn't high enough*/
-    display: grid;          /* These two center the modal */
-    text-align: right;
-
-    display: none;
+.modal-header {
+    text-align: center;
 }
-
-#modal-container.is-visible {
-    display: block;
-}
-
-.modal {
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    background: #fff;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    width: 20%;
-    max-width: 400px;
-    text-align: left;
-}
-
-.modal-close {
-    float: right;
-    -webkit-appearance: none;      
-    border: 0;
-    background: none;
-    color: #777;
-    cursor: pointer;
-  }
 
 .modal-img {
-    display: block;
     margin: 0 auto;
     width: 50%;
-}
-
-
+}  
 
 @media all and (max-width: 640px) {
     .poke-button {
         width: 75%;
         margin-left: auto;
         margin-right: auto;
-    }
-
-    .modal {
-        width: 80%;
-    }
-
-    #modal-container {
-        justify-content: center;
-        text-align: center;
     }
 }
 
@@ -103,14 +58,5 @@ body {
         width: 50%;
         margin-left: auto;
         margin-right: auto;
-    }
-
-    .modal {
-        width: 80%;
-    }
-
-    #modal-container {
-        justify-content: center;
-        text-align: center;
     }
 }
