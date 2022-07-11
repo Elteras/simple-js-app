@@ -23,8 +23,6 @@ let pokemonRepo = (function() {
         let pokename = pokemon.name
         let pokenameStr = ((pokename.charAt(0)).toUpperCase()) + pokename.slice(1);
 
-        listItem.classList.add('group-list-item') 
-
         button.innerText = pokenameStr;
         button.classList.add('poke-button', 'btn', 'btn-warning');
 
@@ -39,6 +37,11 @@ let pokemonRepo = (function() {
         });    
     }
 
+    function capitalize(word) {
+        let newWord = ((word.charAt(0)).toUpperCase()) + word.slice(1);
+        return newWord
+    }
+
     // Creates and loads Bootstrap modals
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
@@ -47,9 +50,14 @@ let pokemonRepo = (function() {
 
             let pokeHeightStr = ('Height: ' + (pokemon.height/10) + 'm');
             let pokeWeightStr = ('Weight: ' + (pokemon.weight/10) + 'kg');
-            let pokeTypeStr = ('Types: ' + pokemon.types.join(', '));
             let pokeName = pokemon.name;
             let pokeNameStr = ((pokeName.charAt(0)).toUpperCase()) + pokeName.slice(1);
+            
+            let newTypes = [];
+            pokemon.types.forEach(type => newTypes.push(capitalize(type)));
+            pokemon.types = newTypes
+            let pokeTypeStr = ('Types: ' + pokemon.types.join(', '));
+
 
             const modalBody = $(".modal-body");
             const modalTitle = $(".modal-title");
