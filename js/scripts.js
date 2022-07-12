@@ -154,7 +154,7 @@ pokemonRepo.loadList().then(function() {
     pokemonRepo.getAll().forEach(function(pokemon){
         pokemonRepo.addListItem(pokemon);
     });
-});
+}); 
 
 
 
